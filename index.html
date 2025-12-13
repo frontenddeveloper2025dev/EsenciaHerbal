@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Landing Cosmética Natural</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Canva SDKs -->
+    <script src="/_sdk/element_sdk.js"></script>
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #064e3b;
+      }
+      .app-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow-auto;
+        background-color: #064e3b;
+      }
+      /* Pequeñas animaciones suaves */
+      .card-hover {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+      }
+      .btn-focus:focus-visible,
+      .link-focus:focus-visible,
+      .input-focus:focus-visible {
+        outline: 3px solid rgba(255,255,255,0.9);
+        outline-offset: 2px;
+      }
+    </style>
+    <style>
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  </head>
+  <body class="h-full w-full bg-emerald-900">
+    <div id="app-root" class="app-wrapper bg-emerald-900 flex flex-col">
+      <header class="w-full bg-emerald-900">
+        <nav
+          class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between bg-emerald-900"
+        >
+          <div class="flex items-center gap-2">
+            <!-- Logo simple con hojas -->
+            <div
+              class="w-9 h-9 rounded-full bg-lime-300 flex items-center justify-center"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-6 h-6 text-emerald-900"
+                viewbox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M4 18C4 11 9 5 16 4C17 11 11 18 4 18Z"
+                  fill="currentColor"
+                  opacity="0.85"
+                />
+                <path
+                  d="M10 20C10 15 14 10 19 9C19.8 14 16 20 10 20Z"
+                  fill="currentColor"
+                  opacity="0.6"
+                />
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <span
+                id="brand-name"
+                class="text-lime-100 font-semibold tracking-wide text-sm md:text-base"
+              >
+                Esencia Herbal
+              </span>
+              <span class="text-lime-200 text-xs md:text-sm">
+                Jabones · Shampoos · Cremas
+              </span>
+            </div>
+          </div>
+          <div class="hidden md:flex gap-6 text-sm text-lime-100">
+            <a href="#productos" class="link-focus hover:text-white"
+              >Productos</a
+            >
+            <a href="#beneficios" class="link-focus hover:text-white"
+              >Beneficios</a
+            >
+            <a href="#contacto" class="link-focus hover:text-white">Contacto</a>
+          </div>
+        </nav>
+      </header>
+      <main class="flex-1 w-full bg-emerald-900">
+        <!-- HERO -->
+        <section class="w-full bg-emerald-900">
+          <div
+            class="max-w-6xl mx-auto px-6 py-10 md:py-14 lg:py-16 grid md:grid-cols-2 gap-10 items-center bg-emerald-900"
+          >
+            <div class="space-y-6 bg-emerald-900">
+              <h1
+                id="hero-title"
+                class="text-3xl md:text-4xl lg:text-5xl font-bold text-lime-100 leading-tight"
+              >
+                Cosmética natural hecha con amor
+              </h1>
+              <p
+                id="hero-subtitle"
+                class="text-base md:text-lg text-lime-100/90"
+              >
+                Jabones, shampoos y cremas herbales y frutales, libres de
+                parabenos, hechos a mano para cuidar tu piel y tu cabello de
+                forma suave y consciente.
+              </p>
+              <ul class="space-y-2 text-lime-100/90 text-sm md:text-base">
+                <li class="flex gap-2 items-start">
+                  <span class="mt-1 text-lime-200">🍃</span>
+                  <span
+                    >Ingredientes botánicos seleccionados: romero, lavanda,
+                    aloe, avena y más.</span
+                  >
+                </li>
+                <li class="flex gap-2 items-start">
+                  <span class="mt-1 text-lime-200">🍊</span>
+                  <span
+                    >Aromas frutales: naranja, coco, frutos rojos y
+                    vainilla.</span
+                  >
+                </li>
+                <li class="flex gap-2 items-start">
+                  <span class="mt-1 text-lime-200">💧</span>
+                  <span
+                    >Fórmulas suaves: ideales para uso diario en todo tipo de
+                    piel.</span
+                  >
+                </li>
+              </ul>
+              <div class="flex flex-wrap gap-4 pt-2">
+                <button
+                  id="hero-main-button"
+                  type="button"
+                  class="btn-focus inline-flex items-center justify-center px-6 py-3 rounded-full bg-lime-300 text-emerald-900 font-semibold text-sm md:text-base shadow-md hover:bg-lime-200 transition-colors"
+                >
+                  Ver catálogo
+                </button>
+                <button
+                  id="hero-secondary-button"
+                  type="button"
+                  class="btn-focus inline-flex items-center justify-center px-5 py-2.5 rounded-full border border-lime-200 text-lime-100 text-sm md:text-base hover:bg-emerald-800/60 transition-colors"
+                >
+                  Ver ingredientes
+                </button>
+              </div>
+            </div>
+            <!-- LADO VISUAL: "composición" de productos con colores frutales -->
+            <div class="relative h-full bg-emerald-900">
+              <div class="relative max-w-md mx-auto bg-emerald-900">
+                <div
+                  class="relative grid grid-cols-1 sm:grid-cols-2 gap-4 bg-emerald-900"
+                >
+                  <!-- Tarjeta jabón -->
+                  <article
+                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3"
+                  >
+                    <div class="flex items-center justify-between gap-3">
+                      <div
+                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                      >
+                        <span class="text-emerald-900 text-xl">🧼</span>
+                      </div>
+                      <span
+                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                      >
+                        Jabones
+                      </span>
+                    </div>
+                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                      Jabones artesanales
+                    </h3>
+                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                      Con aceites vegetales, arcillas, miel y extractos herbales
+                      para una limpieza suave.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-1">
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Avena &amp; miel
+                      </span>
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Lavanda
+                      </span>
+                    </div>
+                  </article>
+                  <!-- Tarjeta shampoo -->
+                  <article
+                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3 sm:translate-y-4"
+                  >
+                    <div class="flex items-center justify-between gap-3">
+                      <div
+                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                      >
+                        <span class="text-emerald-900 text-xl">🧴</span>
+                      </div>
+                      <span
+                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                      >
+                        Shampoos
+                      </span>
+                    </div>
+                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                      Shampoo sólido &amp; líquido
+                    </h3>
+                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                      Fórmulas con romero, ortiga y aloe para fortalecer, dar
+                      brillo y equilibrar.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-1">
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Anticaída
+                      </span>
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Brillo
+                      </span>
+                    </div>
+                  </article>
+                  <!-- Tarjeta cremas -->
+                  <article
+                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3"
+                  >
+                    <div class="flex items-center justify-between gap-3">
+                      <div
+                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                      >
+                        <span class="text-emerald-900 text-xl">🥥</span>
+                      </div>
+                      <span
+                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                      >
+                        Cremas
+                      </span>
+                    </div>
+                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                      Cremas &amp; mantecas
+                    </h3>
+                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                      Hidratación profunda con manteca de karité, coco, almendra
+                      y frutas tropicales.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-1">
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Piel seca
+                      </span>
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Corporal
+                      </span>
+                    </div>
+                  </article>
+                  <!-- Tarjeta frutas & hierbas -->
+                  <article
+                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3 sm:translate-y-4"
+                  >
+                    <div class="flex items-center justify-between gap-3">
+                      <div
+                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                      >
+                        <span class="text-emerald-900 text-xl">🍊</span>
+                      </div>
+                      <span
+                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                      >
+                        Frutas &amp; hierbas
+                      </span>
+                    </div>
+                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                      Aromas naturales
+                    </h3>
+                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                      Fragancias inspiradas en huertos y bosques: cítricos,
+                      frutos rojos, hierbas y flores.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-1">
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Cítricos
+                      </span>
+                      <span
+                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                      >
+                        Florales
+                      </span>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- PRODUCTOS -->
+        <section
+          id="productos"
+          class="w-full border-t border-emerald-800 bg-emerald-900"
+        >
+          <div class="max-w-6xl mx-auto px-6 py-10 md:py-12 bg-emerald-900">
+            <div
+              class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+            >
+              <div class="space-y-2 max-w-xl">
+                <h2
+                  id="productos-title"
+                  class="text-2xl md:text-3xl font-semibold text-lime-100"
+                >
+                  Nuestros productos estrella
+                </h2>
+                <p
+                  id="productos-text"
+                  class="text-sm md:text-base text-lime-100/85"
+                >
+                  Diseñados para quienes aman lo natural: jabones cremosos,
+                  shampoos equilibrantes y cremas que nutren la piel sin
+                  ingredientes agresivos.
+                </p>
+              </div>
+              <div class="flex gap-3 text-xs md:text-sm text-lime-100/80">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-lime-300"></span>
+                  <span>Hecho a mano</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-lime-300"></span>
+                  <span>Libre de crueldad</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+              <!-- Card 1 -->
+              <article
+                class="card-hover rounded-2xl bg-emerald-900 border border-emerald-800 px-5 py-6 flex flex-col justify-between gap-4"
+              >
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+                      Línea Herbal
+                    </h3>
+                    <span
+                      class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100 text-[11px]"
+                    >
+                      Diaria
+                    </span>
+                  </div>
+                  <p class="text-sm text-lime-100/85 leading-relaxed">
+                    Para quienes buscan el poder de las plantas: romero,
+                    lavanda, manzanilla, caléndula y más, en fórmulas suaves
+                    para piel y cabello.
+                  </p>
+                </div>
+                <ul class="text-xs text-lime-100/85 space-y-1.5">
+                  <li>• Jabones herbales calmantes</li>
+                  <li>• Shampoos fortalecedores</li>
+                  <li>• Cremas ligeras para uso diario</li>
+                </ul>
+              </article>
+              <!-- Card 2 -->
+              <article
+                class="card-hover rounded-2xl bg-emerald-900 border border-emerald-800 px-5 py-6 flex flex-col justify-between gap-4"
+              >
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+                      Línea Frutal
+                    </h3>
+                    <span
+                      class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100 text-[11px]"
+                    >
+                      Aromática
+                    </span>
+                  </div>
+                  <p class="text-sm text-lime-100/85 leading-relaxed">
+                    Naranja, limón, coco, frutos rojos y vainilla para una
+                    experiencia sensorial deliciosa que perfuma suavemente tu
+                    rutina diaria.
+                  </p>
+                </div>
+                <ul class="text-xs text-lime-100/85 space-y-1.5">
+                  <li>• Jabones frutales cremosos</li>
+                  <li>• Shampoos con aroma cítrico</li>
+                  <li>• Cremas corporales dulces</li>
+                </ul>
+              </article>
+              <!-- Card 3 -->
+              <article
+                class="card-hover rounded-2xl bg-emerald-900 border border-emerald-800 px-5 py-6 flex flex-col justify-between gap-4"
+              >
+                <div class="space-y-3">
+                  <div class="flex items-center justify-between">
+                    <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+                      Kits de regalo
+                    </h3>
+                    <span
+                      class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100 text-[11px]"
+                    >
+                      Especial
+                    </span>
+                  </div>
+                  <p class="text-sm text-lime-100/85 leading-relaxed">
+                    Combos de jabones, shampoo y cremas listos para regalar en
+                    empaques cuidados, ideales para sorprender de forma
+                    consciente.
+                  </p>
+                </div>
+                <ul class="text-xs text-lime-100/85 space-y-1.5">
+                  <li>• Packs personalizados</li>
+                  <li>• Mensajes dedicados</li>
+                  <li>• Opción herbales o frutales</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+        <!-- BENEFICIOS -->
+        <section
+          id="beneficios"
+          class="w-full border-t border-emerald-800 bg-emerald-900"
+        >
+          <div class="max-w-6xl mx-auto px-6 py-10 md:py-12 bg-emerald-900">
+            <div
+              class="flex flex-col md:flex-row md:items-start md:justify-between gap-8"
+            >
+              <div class="max-w-xl space-y-3">
+                <h2
+                  id="beneficios-title"
+                  class="text-2xl md:text-3xl font-semibold text-lime-100"
+                >
+                  ¿Por qué elegir cosmética herbal y frutal?
+                </h2>
+                <p class="text-sm md:text-base text-lime-100/85">
+                  Apostamos por fórmulas simples, efectivas y respetuosas con tu
+                  piel y el entorno. Cada producto está pensado para acompañar
+                  tu ritual diario con calma y bienestar.
+                </p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
+                <div
+                  class="rounded-2xl bg-emerald-900 border border-emerald-800 px-4 py-5 space-y-2"
+                >
+                  <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                    Ingredientes conscientes
+                  </h3>
+                  <p class="text-xs md:text-sm text-lime-100/85">
+                    Usamos aceites vegetales, extractos herbales y aromas
+                    inspirados en frutas reales. Sin parabenos ni aceites
+                    minerales.
+                  </p>
+                </div>
+                <div
+                  class="rounded-2xl bg-emerald-900 border border-emerald-800 px-4 py-5 space-y-2"
+                >
+                  <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                    Rituales sencillos
+                  </h3>
+                  <p class="text-xs md:text-sm text-lime-100/85">
+                    Productos pensados para que tu rutina sea un momento
+                    agradable, sin pasos complicados ni exceso de productos.
+                  </p>
+                </div>
+                <div
+                  class="rounded-2xl bg-emerald-900 border border-emerald-800 px-4 py-5 space-y-2"
+                >
+                  <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                    Belleza natural
+                  </h3>
+                  <p class="text-xs md:text-sm text-lime-100/85">
+                    Respetamos la textura natural de tu piel y cabello, buscando
+                    equilibrio, suavidad y bienestar a largo plazo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- CTA / CONTACTO -->
+        <section
+          id="contacto"
+          class="w-full border-t border-emerald-800 bg-emerald-900"
+        >
+          <div
+            class="max-w-6xl mx-auto px-6 py-10 md:py-12 flex flex-col lg:flex-row gap-10 lg:items-center bg-emerald-900"
+          >
+            <div class="flex-1 space-y-4">
+              <h2
+                id="cta-title"
+                class="text-2xl md:text-3xl font-semibold text-lime-100"
+              >
+                ¿Listo para cuidar tu piel con plantas y frutas?
+              </h2>
+              <p class="text-sm md:text-base text-lime-100/85">
+                Déjanos tu correo y te enviaremos el catálogo actualizado, tips
+                de cuidado natural y las novedades de cada temporada.
+              </p>
+              <form
+                id="contact-form"
+                class="mt-2 flex flex-col sm:flex-row gap-3 max-w-lg"
+                aria-labelledby="cta-title"
+              >
+                <div class="flex-1">
+                  <label for="email" class="sr-only">Correo electrónico</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    class="input-focus w-full px-4 py-2.5 rounded-full bg-emerald-900 border border-emerald-700 text-lime-100 placeholder-lime-100/60 text-sm"
+                    placeholder="Tu correo electrónico"
+                    required
+                  />
+                </div>
+                <button
+                  id="cta-button"
+                  type="submit"
+                  class="btn-focus inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-lime-300 text-emerald-900 font-semibold text-sm md:text-base shadow-md hover:bg-lime-200 transition-colors"
+                >
+                  Escríbeme el catálogo
+                </button>
+              </form>
+              <p
+                id="form-message"
+                class="text-xs md:text-sm text-lime-100/85 mt-1"
+                aria-live="polite"
+              ></p>
+            </div>
+            <!-- Mini lista de ingredientes -->
+            <aside
+              class="flex-1 rounded-3xl bg-emerald-900 border border-emerald-800 px-5 py-6 space-y-4"
+            >
+              <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+                Ingredientes favoritos de la casa
+              </h3>
+              <ul
+                class="grid grid-cols-2 gap-3 text-xs md:text-sm text-lime-100/90"
+              >
+                <li class="flex items-center gap-2">
+                  <span>🌿</span> <span>Romero &amp; ortiga</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span>🌾</span> <span>Avena &amp; miel</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span>🍊</span> <span>Naranja &amp; limón</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span>🥥</span> <span>Coco &amp; vainilla</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span>🌸</span> <span>Lavanda &amp; rosa</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <span>🍇</span> <span>Frutos rojos</span>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </section>
+      </main>
+      <footer class="w-full border-t border-emerald-800 bg-emerald-900">
+        <div class="max-w-6xl mx-auto px-6 py-6 space-y-6 bg-emerald-900">
+          <!-- Información de contacto -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs md:text-sm text-lime-100/85"
+          >
+            <div class="flex items-start gap-2">
+              <span class="text-lime-300 mt-0.5">📧</span>
+              <div>
+                <p class="font-semibold text-lime-100">Email</p>
+                <a
+                  href="mailto:hola@escenciaherbal.com"
+                  class="link-focus hover:text-lime-200 underline"
+                >
+                  hola@escenciaherbal.com
+                </a>
+              </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-lime-300 mt-0.5">📱</span>
+              <div>
+                <p class="font-semibold text-lime-100">Teléfono</p>
+                <a
+                  href="tel:+525610677516"
+                  class="link-focus hover:text-lime-200 underline"
+                >
+                  56 1067 7516
+                </a>
+              </div>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-lime-300 mt-0.5">📍</span>
+              <div>
+                <p class="font-semibold text-lime-100">Dirección</p>
+                <p>
+                  Toltecas 166<br />
+                  San Pedro de los Pinos<br />
+                  CDMX 01180
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Footer text y badges -->
+          <div
+            class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-emerald-800"
+          >
+            <p
+              id="footer-text"
+              class="text-xs md:text-sm text-lime-100/75 text-center sm:text-left"
+            >
+              Hecho con amor, plantas y frutas. Cosmética natural para tu día a
+              día.
+            </p>
+            <div class="flex gap-3 text-xs text-lime-100/80">
+              <span>🍃 Marca artesanal</span> <span>·</span>
+              <span>Producción limitada</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      // Configuración por defecto para el panel de edición
+      const defaultConfig = {
+        hero_titulo: "Cosmética natural hecha con amor",
+        hero_subtitulo: "Jabones, shampoos y cremas herbales y frutales",
+        hero_boton: "Ver catálogo",
+        productos_titulo: "Nuestros productos estrella",
+        productos_texto:
+          "Diseñados para quienes aman lo natural: jabones cremosos, shampoos equilibrantes y cremas que nutren la piel sin ingredientes agresivos.",
+        beneficios_titulo: "¿Por qué elegir cosmética herbal y frutal?",
+        cta_titulo: "¿Listo para cuidar tu piel con plantas y frutas?",
+        cta_boton: "Escríbeme el catálogo",
+        footer_texto:
+          "Hecho con amor, plantas y frutas. Cosmética natural para tu día a día.",
+        productos_label: "",
+        beneficios_label: "",
+        header_label: "",
+        cta_label: "",
+        hero_font_family: "system-ui",
+        hero_font_size: 18,
+        background_color: "#064e3b",
+        surface_color: "#064e3b",
+        text_color: "#ecfdf5",
+        primary_color: "#bef264",
+        secondary_color: "#047857",
+      };
+
+      // Referencias de texto
+      const heroTitleEl = document.getElementById("hero-title");
+      const heroSubtitleEl = document.getElementById("hero-subtitle");
+      const heroMainButtonEl = document.getElementById("hero-main-button");
+      const productosTitleEl = document.getElementById("productos-title");
+      const productosTextEl = document.getElementById("productos-text");
+      const beneficiosTitleEl = document.getElementById("beneficios-title");
+      const ctaTitleEl = document.getElementById("cta-title");
+      const ctaButtonEl = document.getElementById("cta-button");
+      const footerTextEl = document.getElementById("footer-text");
+      const appRootEl = document.getElementById("app-root");
+
+      // Función para aplicar cambios de configuración (colores, textos, tipografía)
+      async function applyConfig(config) {
+        const cfg = Object.assign({}, defaultConfig, config || {});
+
+        // Tipografía base y tamaños relativos
+        const baseSize =
+          typeof cfg.hero_font_size === "number" && cfg.hero_font_size > 0
+            ? cfg.hero_font_size
+            : defaultConfig.hero_font_size;
+        const baseFont = cfg.hero_font_family || defaultConfig.hero_font_family;
+        const fontStack =
+          baseFont +
+          ", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+
+        document.body.style.fontFamily = fontStack;
+
+        // Escalado de textos clave
+        heroTitleEl.style.fontSize = baseSize * 2 + "px";
+        heroSubtitleEl.style.fontSize = baseSize * 1.05 + "px";
+        productosTitleEl.style.fontSize = baseSize * 1.5 + "px";
+        beneficiosTitleEl.style.fontSize = baseSize * 1.5 + "px";
+        ctaTitleEl.style.fontSize = baseSize * 1.5 + "px";
+        footerTextEl.style.fontSize = baseSize * 0.8 + "px";
+
+        // Textos
+        heroTitleEl.textContent = cfg.hero_titulo || defaultConfig.hero_titulo;
+        heroSubtitleEl.textContent =
+          cfg.hero_subtitulo || defaultConfig.hero_subtitulo;
+        heroMainButtonEl.textContent =
+          cfg.hero_boton || defaultConfig.hero_boton;
+        productosTitleEl.textContent =
+          cfg.productos_titulo || defaultConfig.productos_titulo;
+        productosTextEl.textContent =
+          cfg.productos_texto || defaultConfig.productos_texto;
+        beneficiosTitleEl.textContent =
+          cfg.beneficios_titulo || defaultConfig.beneficios_titulo;
+        ctaTitleEl.textContent = cfg.cta_titulo || defaultConfig.cta_titulo;
+        ctaButtonEl.textContent = cfg.cta_boton || defaultConfig.cta_boton;
+        footerTextEl.textContent =
+          cfg.footer_texto || defaultConfig.footer_texto;
+
+        // Colores
+        const backgroundColor =
+          cfg.background_color || defaultConfig.background_color;
+        const textColor = cfg.text_color || defaultConfig.text_color;
+        const primaryColor = cfg.primary_color || defaultConfig.primary_color;
+
+        // Fondo principal
+        appRootEl.style.backgroundColor = backgroundColor;
+        document.body.style.backgroundColor = backgroundColor;
+        document.documentElement.style.backgroundColor = backgroundColor;
+
+        // Botones
+        heroMainButtonEl.style.backgroundColor = primaryColor;
+        heroMainButtonEl.style.color = "#022c22";
+        ctaButtonEl.style.backgroundColor = primaryColor;
+        ctaButtonEl.style.color = "#022c22";
+
+        // Texto principal
+        heroTitleEl.style.color = textColor;
+        heroSubtitleEl.style.color = textColor;
+      }
+
+      // Inicializamos el formulario de contacto
+      (function initForm() {
+        const form = document.getElementById("contact-form");
+        const emailInput = document.getElementById("email");
+        const messageEl = document.getElementById("form-message");
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          const email = emailInput.value.trim();
+
+          if (!email) {
+            messageEl.textContent =
+              "Por favor, escribe tu correo para poder enviarte el catálogo.";
+            return;
+          }
+
+          messageEl.textContent =
+            "¡Gracias! Guardaremos tu correo para enviarte el catálogo y las novedades. (Demostración)";
+          emailInput.value = "";
+        });
+      })();
+
+      // Botones de navegación suave internos
+      document
+        .getElementById("hero-main-button")
+        .addEventListener("click", function () {
+          const productosSection = document.getElementById("productos");
+          if (productosSection) {
+            productosSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+
+      document
+        .getElementById("hero-secondary-button")
+        .addEventListener("click", function () {
+          const beneficiosSection = document.getElementById("beneficios");
+          if (beneficiosSection) {
+            beneficiosSection.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+
+      // Inicializar Element SDK
+      (async function initElementSdk() {
+        if (!window.elementSdk) {
+          applyConfig(defaultConfig);
+          return;
+        }
+
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            await applyConfig(config);
+          },
+          mapToCapabilities: (config) => {
+            const cfg = Object.assign({}, defaultConfig, config || {});
+            return {
+              recolorables: [
+                {
+                  get: () => cfg.background_color,
+                  set: (value) => {
+                    cfg.background_color = value;
+                    window.elementSdk.setConfig({ background_color: value });
+                  },
+                },
+                {
+                  get: () => cfg.text_color,
+                  set: (value) => {
+                    cfg.text_color = value;
+                    window.elementSdk.setConfig({ text_color: value });
+                  },
+                },
+                {
+                  get: () => cfg.primary_color,
+                  set: (value) => {
+                    cfg.primary_color = value;
+                    window.elementSdk.setConfig({ primary_color: value });
+                  },
+                },
+              ],
+              borderables: [],
+              fontEditable: {
+                get: () => cfg.hero_font_family,
+                set: (value) => {
+                  cfg.hero_font_family = value;
+                  window.elementSdk.setConfig({ hero_font_family: value });
+                },
+              },
+              fontSizeable: {
+                get: () => cfg.hero_font_size,
+                set: (value) => {
+                  const size = Number(value) || defaultConfig.hero_font_size;
+                  cfg.hero_font_size = size;
+                  window.elementSdk.setConfig({ hero_font_size: size });
+                },
+              },
+            };
+          },
+          mapToEditPanelValues: (config) => {
+            const cfg = Object.assign({}, defaultConfig, config || {});
+            return new Map([
+              ["hero_titulo", cfg.hero_titulo],
+              ["hero_subtitulo", cfg.hero_subtitulo],
+              ["hero_boton", cfg.hero_boton],
+              ["productos_titulo", cfg.productos_titulo],
+              ["productos_texto", cfg.productos_texto],
+              ["beneficios_titulo", cfg.beneficios_titulo],
+              ["cta_titulo", cfg.cta_titulo],
+              ["cta_boton", cfg.cta_boton],
+              ["footer_texto", cfg.footer_texto],
+              ["header_label", cfg.header_label],
+              ["productos_label", cfg.productos_label],
+              ["beneficios_label", cfg.beneficios_label],
+              ["cta_label", cfg.cta_label],
+            ]);
+          },
+        });
+
+        await applyConfig(window.elementSdk.config || defaultConfig);
+      })();
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9ad32875b191fc05',t:'MTc2NTYwNDc1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
