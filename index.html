@@ -12,7 +12,8 @@
       body {
         box-sizing: border-box;
       }
-      html, body {
+      html,
+      body {
         height: 100%;
         width: 100%;
         margin: 0;
@@ -22,8 +23,9 @@
       .app-wrapper {
         width: 100%;
         height: 100%;
-        overflow-auto;
         background-color: #064e3b;
+        max-width: 600px;
+        margin: 0 auto;
       }
       /* Pequeñas animaciones suaves */
       .card-hover {
@@ -31,12 +33,12 @@
       }
       .card-hover:hover {
         transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
       }
       .btn-focus:focus-visible,
       .link-focus:focus-visible,
       .input-focus:focus-visible {
-        outline: 3px solid rgba(255,255,255,0.9);
+        outline: 3px solid rgba(255, 255, 255, 0.9);
         outline-offset: 2px;
       }
     </style>
@@ -49,53 +51,128 @@
   </head>
   <body class="h-full w-full bg-emerald-900">
     <div id="app-root" class="app-wrapper bg-emerald-900 flex flex-col">
-      <header class="w-full bg-emerald-900">
+      <!-- HEADER -->
+      <header
+        class="sticky top-0 z-40 w-full bg-emerald-900/95 backdrop-blur-sm border-b border-emerald-700"
+      >
         <nav
-          class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between bg-emerald-900"
+          class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6"
+          aria-label="Navegación principal"
         >
-          <div class="flex items-center gap-2">
-            <!-- Logo simple con hojas -->
-            <div
-              class="w-9 h-9 rounded-full bg-lime-300 flex items-center justify-center"
+          <div class="flex items-center justify-between h-14 sm:h-16 md:h-20">
+            <!-- Logo -->
+            <a href="#" class="flex-shrink-0 link-focus rounded-lg">
+              <img
+                src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/Logo%20Productos%20naturales%20elegante%20verde.png"
+                alt="Esencia Herbal - Productos Naturales"
+                class="h-16 sm:h-20 md:h-28 w-auto"
+                onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'text-lime-100 font-bold text-base sm:text-xl\'>Esencia Herbal</div>';"
+              />
+            </a>
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex items-center gap-8">
+              <a
+                href="#productos"
+                class="link-focus text-lime-100 hover:text-lime-200 font-medium transition-colors"
+              >
+                Productos
+              </a>
+              <a
+                href="#beneficios"
+                class="link-focus text-lime-100 hover:text-lime-200 font-medium transition-colors"
+              >
+                Beneficios
+              </a>
+              <a
+                href="#galeria"
+                class="link-focus text-lime-100 hover:text-lime-200 font-medium transition-colors"
+              >
+                Galería
+              </a>
+              <a
+                href="#contacto"
+                class="link-focus text-lime-100 hover:text-lime-200 font-medium transition-colors"
+              >
+                Contacto
+              </a>
+              <a
+                href="#contacto"
+                class="btn-focus px-5 py-2 rounded-full bg-lime-300 text-emerald-900 font-semibold hover:bg-lime-200 transition-colors"
+              >
+                Pedir catálogo
+              </a>
+            </div>
+            <!-- Botón menú móvil -->
+            <button
+              id="mobile-menu-toggle"
+              type="button"
+              class="md:hidden btn-focus p-2 rounded-lg text-lime-100 hover:bg-emerald-800 transition-colors"
+              aria-label="Abrir menú"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
             >
               <svg
-                aria-hidden="true"
-                class="w-6 h-6 text-emerald-900"
-                viewbox="0 0 24 24"
+                id="menu-icon"
+                class="w-7 h-7"
                 fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
               >
                 <path
-                  d="M4 18C4 11 9 5 16 4C17 11 11 18 4 18Z"
-                  fill="currentColor"
-                  opacity="0.85"
-                />
-                <path
-                  d="M10 20C10 15 14 10 19 9C19.8 14 16 20 10 20Z"
-                  fill="currentColor"
-                  opacity="0.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </div>
-            <div class="flex flex-col">
-              <span
-                id="brand-name"
-                class="text-lime-100 font-semibold tracking-wide text-sm md:text-base"
+              <svg
+                id="close-icon"
+                class="w-7 h-7 hidden"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
               >
-                Esencia Herbal
-              </span>
-              <span class="text-lime-200 text-xs md:text-sm">
-                Jabones · Shampoos · Cremas
-              </span>
-            </div>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
           </div>
-          <div class="hidden md:flex gap-6 text-sm text-lime-100">
-            <a href="#productos" class="link-focus hover:text-white"
-              >Productos</a
+          <!-- Menú móvil desplegable -->
+          <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2">
+            <a
+              href="#productos"
+              class="mobile-menu-link block px-4 py-3 rounded-lg text-lime-100 hover:bg-emerald-800 font-medium transition-colors"
             >
-            <a href="#beneficios" class="link-focus hover:text-white"
-              >Beneficios</a
+              Productos
+            </a>
+            <a
+              href="#beneficios"
+              class="mobile-menu-link block px-4 py-3 rounded-lg text-lime-100 hover:bg-emerald-800 font-medium transition-colors"
             >
-            <a href="#contacto" class="link-focus hover:text-white">Contacto</a>
+              Beneficios
+            </a>
+            <a
+              href="#galeria"
+              class="mobile-menu-link block px-4 py-3 rounded-lg text-lime-100 hover:bg-emerald-800 font-medium transition-colors"
+            >
+              Galería
+            </a>
+            <a
+              href="#contacto"
+              class="mobile-menu-link block px-4 py-3 rounded-lg text-lime-100 hover:bg-emerald-800 font-medium transition-colors"
+            >
+              Contacto
+            </a>
+            <a
+              href="#contacto"
+              class="mobile-menu-link block px-4 py-3 text-center rounded-lg bg-lime-300 text-emerald-900 font-semibold hover:bg-lime-200 transition-colors"
+            >
+              Pedir catálogo
+            </a>
           </div>
         </nav>
       </header>
@@ -103,58 +180,68 @@
         <!-- HERO -->
         <section class="w-full bg-emerald-900">
           <div
-            class="max-w-6xl mx-auto px-6 py-10 md:py-14 lg:py-16 grid md:grid-cols-2 gap-10 items-center bg-emerald-900"
+            class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-14 lg:py-16 flex flex-col gap-6 sm:gap-8 md:gap-10 bg-emerald-900"
           >
-            <div class="space-y-6 bg-emerald-900">
+            <div class="space-y-3 sm:space-y-4 md:space-y-6 bg-emerald-900">
               <h1
                 id="hero-title"
-                class="text-3xl md:text-4xl lg:text-5xl font-bold text-lime-100 leading-tight"
+                class="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-lime-100"
+                style="line-height: 1.8"
               >
                 Cosmética natural hecha con amor
               </h1>
               <p
                 id="hero-subtitle"
-                class="text-base md:text-lg text-lime-100/90"
+                class="text-xs sm:text-sm md:text-lg text-lime-100/90"
+                style="line-height: 1.9"
               >
                 Jabones, shampoos y cremas herbales y frutales, libres de
                 parabenos, hechos a mano para cuidar tu piel y tu cabello de
                 forma suave y consciente.
               </p>
-              <ul class="space-y-2 text-lime-100/90 text-sm md:text-base">
+              <ul
+                class="space-y-2 text-lime-100/90 text-[11px] sm:text-xs md:text-base"
+              >
                 <li class="flex gap-2 items-start">
-                  <span class="mt-1 text-lime-200">🍃</span>
+                  <span class="mt-0.5 text-lime-200 text-sm sm:text-base"
+                    >🍃</span
+                  >
                   <span
                     >Ingredientes botánicos seleccionados: romero, lavanda,
                     aloe, avena y más.</span
                   >
                 </li>
                 <li class="flex gap-2 items-start">
-                  <span class="mt-1 text-lime-200">🍊</span>
+                  <span class="mt-0.5 text-lime-200 text-sm sm:text-base"
+                    >🍊</span
+                  >
                   <span
                     >Aromas frutales: naranja, coco, frutos rojos y
                     vainilla.</span
                   >
                 </li>
                 <li class="flex gap-2 items-start">
-                  <span class="mt-1 text-lime-200">💧</span>
+                  <span class="mt-0.5 text-lime-200 text-sm sm:text-base"
+                    >💧</span
+                  >
                   <span
                     >Fórmulas suaves: ideales para uso diario en todo tipo de
                     piel.</span
                   >
                 </li>
               </ul>
-              <div class="flex flex-wrap gap-4 pt-2">
+              <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-2">
                 <button
                   id="hero-main-button"
                   type="button"
-                  class="btn-focus inline-flex items-center justify-center px-6 py-3 rounded-full bg-lime-300 text-emerald-900 font-semibold text-sm md:text-base shadow-md hover:bg-lime-200 transition-colors"
+                  class="btn-focus inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-lime-300 text-emerald-900 font-semibold text-xs sm:text-sm md:text-base shadow-md hover:bg-lime-200 transition-colors"
                 >
                   Ver catálogo
                 </button>
                 <button
                   id="hero-secondary-button"
                   type="button"
-                  class="btn-focus inline-flex items-center justify-center px-5 py-2.5 rounded-full border border-lime-200 text-lime-100 text-sm md:text-base hover:bg-emerald-800/60 transition-colors"
+                  class="btn-focus inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-lime-200 text-lime-100 text-xs sm:text-sm md:text-base hover:bg-emerald-800/60 transition-colors"
                 >
                   Ver ingredientes
                 </button>
@@ -162,41 +249,57 @@
             </div>
             <!-- LADO VISUAL: "composición" de productos con colores frutales -->
             <div class="relative h-full bg-emerald-900">
-              <div class="relative max-w-md mx-auto bg-emerald-900">
+              <div class="relative w-full mx-auto bg-emerald-900">
                 <div
-                  class="relative grid grid-cols-1 sm:grid-cols-2 gap-4 bg-emerald-900"
+                  class="relative grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 md:gap-4 bg-emerald-900"
                 >
                   <!-- Tarjeta jabón -->
                   <article
-                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3"
+                    class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl bg-emerald-900 border border-emerald-700 px-2.5 sm:px-3 md:px-4 py-2.5 sm:py-3 md:py-5 flex flex-col gap-1.5 sm:gap-2 md:gap-3"
                   >
-                    <div class="flex items-center justify-between gap-3">
+                    <div class="flex flex-col gap-1.5 sm:gap-2">
                       <div
-                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                        class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-lime-300 flex items-center justify-center"
                       >
-                        <span class="text-emerald-900 text-xl">🧼</span>
+                        <svg
+                          class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-emerald-900"
+                          fill="none"
+                          stroke="currentColor"
+                          viewbox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                          />
+                        </svg>
                       </div>
                       <span
-                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                        class="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-wide text-lime-200 uppercase"
                       >
                         Jabones
                       </span>
                     </div>
-                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                    <h3
+                      class="text-lime-50 font-semibold text-[11px] sm:text-xs md:text-base"
+                    >
                       Jabones artesanales
                     </h3>
-                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                    <p
+                      class="text-lime-100/80 text-[10px] sm:text-[10px] md:text-xs leading-relaxed hidden sm:block"
+                    >
                       Con aceites vegetales, arcillas, miel y extractos herbales
                       para una limpieza suave.
                     </p>
-                    <div class="flex flex-wrap gap-1.5 mt-1">
+                    <div class="flex flex-wrap gap-1 md:gap-1.5">
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
-                        Avena &amp; miel
+                        Avena
                       </span>
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
                         Lavanda
                       </span>
@@ -204,35 +307,51 @@
                   </article>
                   <!-- Tarjeta shampoo -->
                   <article
-                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3 sm:translate-y-4"
+                    class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl bg-emerald-900 border border-emerald-700 px-2.5 sm:px-3 md:px-4 py-2.5 sm:py-3 md:py-5 flex flex-col gap-1.5 sm:gap-2 md:gap-3"
                   >
-                    <div class="flex items-center justify-between gap-3">
+                    <div class="flex flex-col gap-1.5 sm:gap-2">
                       <div
-                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                        class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-lime-300 flex items-center justify-center"
                       >
-                        <span class="text-emerald-900 text-xl">🧴</span>
+                        <svg
+                          class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-emerald-900"
+                          fill="none"
+                          stroke="currentColor"
+                          viewbox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                          />
+                        </svg>
                       </div>
                       <span
-                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                        class="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-wide text-lime-200 uppercase"
                       >
                         Shampoos
                       </span>
                     </div>
-                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
-                      Shampoo sólido &amp; líquido
+                    <h3
+                      class="text-lime-50 font-semibold text-[11px] sm:text-xs md:text-base"
+                    >
+                      Shampoo sólido
                     </h3>
-                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                    <p
+                      class="text-lime-100/80 text-[10px] sm:text-[10px] md:text-xs leading-relaxed hidden sm:block"
+                    >
                       Fórmulas con romero, ortiga y aloe para fortalecer, dar
                       brillo y equilibrar.
                     </p>
-                    <div class="flex flex-wrap gap-1.5 mt-1">
+                    <div class="flex flex-wrap gap-1 md:gap-1.5">
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
                         Anticaída
                       </span>
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
                         Brillo
                       </span>
@@ -240,35 +359,51 @@
                   </article>
                   <!-- Tarjeta cremas -->
                   <article
-                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3"
+                    class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl bg-emerald-900 border border-emerald-700 px-2.5 sm:px-3 md:px-4 py-2.5 sm:py-3 md:py-5 flex flex-col gap-1.5 sm:gap-2 md:gap-3"
                   >
-                    <div class="flex items-center justify-between gap-3">
+                    <div class="flex flex-col gap-1.5 sm:gap-2">
                       <div
-                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                        class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-lime-300 flex items-center justify-center"
                       >
-                        <span class="text-emerald-900 text-xl">🥥</span>
+                        <svg
+                          class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-emerald-900"
+                          fill="none"
+                          stroke="currentColor"
+                          viewbox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+                          />
+                        </svg>
                       </div>
                       <span
-                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                        class="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-wide text-lime-200 uppercase"
                       >
                         Cremas
                       </span>
                     </div>
-                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                    <h3
+                      class="text-lime-50 font-semibold text-[11px] sm:text-xs md:text-base"
+                    >
                       Cremas &amp; mantecas
                     </h3>
-                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                    <p
+                      class="text-lime-100/80 text-[10px] sm:text-[10px] md:text-xs leading-relaxed hidden sm:block"
+                    >
                       Hidratación profunda con manteca de karité, coco, almendra
                       y frutas tropicales.
                     </p>
-                    <div class="flex flex-wrap gap-1.5 mt-1">
+                    <div class="flex flex-wrap gap-1 md:gap-1.5">
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
                         Piel seca
                       </span>
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
                         Corporal
                       </span>
@@ -276,35 +411,51 @@
                   </article>
                   <!-- Tarjeta frutas & hierbas -->
                   <article
-                    class="card-hover rounded-2xl bg-emerald-900 border border-emerald-700 px-4 py-5 flex flex-col gap-3 sm:translate-y-4"
+                    class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl bg-emerald-900 border border-emerald-700 px-2.5 sm:px-3 md:px-4 py-2.5 sm:py-3 md:py-5 flex flex-col gap-1.5 sm:gap-2 md:gap-3"
                   >
-                    <div class="flex items-center justify-between gap-3">
+                    <div class="flex flex-col gap-1.5 sm:gap-2">
                       <div
-                        class="w-10 h-10 rounded-xl bg-lime-300 flex items-center justify-center"
+                        class="w-7 h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-lime-300 flex items-center justify-center"
                       >
-                        <span class="text-emerald-900 text-xl">🍊</span>
+                        <svg
+                          class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-emerald-900"
+                          fill="none"
+                          stroke="currentColor"
+                          viewbox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                          />
+                        </svg>
                       </div>
                       <span
-                        class="text-xs font-semibold tracking-wide text-lime-200 uppercase"
+                        class="text-[9px] sm:text-[10px] md:text-xs font-semibold tracking-wide text-lime-200 uppercase"
                       >
-                        Frutas &amp; hierbas
+                        Aromas
                       </span>
                     </div>
-                    <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                    <h3
+                      class="text-lime-50 font-semibold text-[11px] sm:text-xs md:text-base"
+                    >
                       Aromas naturales
                     </h3>
-                    <p class="text-lime-100/80 text-xs leading-relaxed">
+                    <p
+                      class="text-lime-100/80 text-[10px] sm:text-[10px] md:text-xs leading-relaxed hidden sm:block"
+                    >
                       Fragancias inspiradas en huertos y bosques: cítricos,
                       frutos rojos, hierbas y flores.
                     </p>
-                    <div class="flex flex-wrap gap-1.5 mt-1">
+                    <div class="flex flex-wrap gap-1 md:gap-1.5">
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
                         Cítricos
                       </span>
                       <span
-                        class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[11px]"
+                        class="px-1.5 sm:px-1.5 md:px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100/90 text-[8px] sm:text-[9px] md:text-[11px]"
                       >
                         Florales
                       </span>
@@ -320,60 +471,78 @@
           id="productos"
           class="w-full border-t border-emerald-800 bg-emerald-900"
         >
-          <div class="max-w-6xl mx-auto px-6 py-10 md:py-12 bg-emerald-900">
-            <div
-              class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
-            >
-              <div class="space-y-2 max-w-xl">
+          <div
+            class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-10 md:py-16 bg-emerald-900"
+          >
+            <div class="flex flex-col gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-10">
+              <div class="space-y-3 sm:space-y-4 max-w-3xl mx-auto text-center">
                 <h2
                   id="productos-title"
-                  class="text-2xl md:text-3xl font-semibold text-lime-100"
+                  class="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-lime-100"
+                  style="line-height: 1.8"
                 >
                   Nuestros productos estrella
                 </h2>
                 <p
                   id="productos-text"
-                  class="text-sm md:text-base text-lime-100/85"
+                  class="text-xs sm:text-sm md:text-lg lg:text-xl text-lime-100/85"
+                  style="
+                    line-height: 1.9;
+                    padding-left: 0.5rem;
+                    padding-right: 0.5rem;
+                  "
                 >
                   Diseñados para quienes aman lo natural: jabones cremosos,
                   shampoos equilibrantes y cremas que nutren la piel sin
                   ingredientes agresivos.
                 </p>
               </div>
-              <div class="flex gap-3 text-xs md:text-sm text-lime-100/80">
-                <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-lime-300"></span>
+              <div
+                class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/80 justify-center"
+              >
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <span
+                    class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-lime-300"
+                  ></span>
                   <span>Hecho a mano</span>
                 </div>
-                <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-lime-300"></span>
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <span
+                    class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-lime-300"
+                  ></span>
                   <span>Libre de crueldad</span>
                 </div>
               </div>
             </div>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
               <!-- Card 1 -->
               <article
-                class="card-hover rounded-2xl bg-emerald-900 border border-emerald-800 px-5 py-6 flex flex-col justify-between gap-4"
+                class="card-hover rounded-xl sm:rounded-2xl bg-emerald-900/50 border-2 border-emerald-700 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-7 flex flex-col justify-between gap-3 sm:gap-4 md:gap-5"
               >
-                <div class="space-y-3">
+                <div class="space-y-2 sm:space-y-3 md:space-y-4">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+                    <h3
+                      class="text-lime-50 font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
+                    >
                       Línea Herbal
                     </h3>
                     <span
-                      class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100 text-[11px]"
+                      class="px-2 sm:px-2.5 md:px-3 py-0.5 sm:py-1 rounded-full bg-emerald-800 text-lime-100 text-[10px] sm:text-xs md:text-sm"
                     >
                       Diaria
                     </span>
                   </div>
-                  <p class="text-sm text-lime-100/85 leading-relaxed">
+                  <p
+                    class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 leading-relaxed"
+                  >
                     Para quienes buscan el poder de las plantas: romero,
                     lavanda, manzanilla, caléndula y más, en fórmulas suaves
                     para piel y cabello.
                   </p>
                 </div>
-                <ul class="text-xs text-lime-100/85 space-y-1.5">
+                <ul
+                  class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 space-y-1.5 sm:space-y-2"
+                >
                   <li>• Jabones herbales calmantes</li>
                   <li>• Shampoos fortalecedores</li>
                   <li>• Cremas ligeras para uso diario</li>
@@ -381,55 +550,67 @@
               </article>
               <!-- Card 2 -->
               <article
-                class="card-hover rounded-2xl bg-emerald-900 border border-emerald-800 px-5 py-6 flex flex-col justify-between gap-4"
+                class="card-hover rounded-xl sm:rounded-2xl bg-emerald-900/50 border-2 border-emerald-700 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-7 flex flex-col justify-between gap-3 sm:gap-4 md:gap-5"
               >
-                <div class="space-y-3">
+                <div class="space-y-2 sm:space-y-3 md:space-y-4">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+                    <h3
+                      class="text-lime-50 font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
+                    >
                       Línea Frutal
                     </h3>
                     <span
-                      class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100 text-[11px]"
+                      class="px-2 sm:px-2.5 md:px-3 py-0.5 sm:py-1 rounded-full bg-emerald-800 text-lime-100 text-[10px] sm:text-xs md:text-sm"
                     >
                       Aromática
                     </span>
                   </div>
-                  <p class="text-sm text-lime-100/85 leading-relaxed">
+                  <p
+                    class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 leading-relaxed"
+                  >
                     Naranja, limón, coco, frutos rojos y vainilla para una
                     experiencia sensorial deliciosa que perfuma suavemente tu
                     rutina diaria.
                   </p>
                 </div>
-                <ul class="text-xs text-lime-100/85 space-y-1.5">
-                  <li>• Jabones frutales cremosos</li>
+                <ul
+                  class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 space-y-1.5 sm:space-y-2"
+                >
+                  <li>🍊 Jabones frutales cremosos</li>
                   <li>• Shampoos con aroma cítrico</li>
                   <li>• Cremas corporales dulces</li>
                 </ul>
               </article>
               <!-- Card 3 -->
               <article
-                class="card-hover rounded-2xl bg-emerald-900 border border-emerald-800 px-5 py-6 flex flex-col justify-between gap-4"
+                class="card-hover rounded-xl sm:rounded-2xl bg-emerald-900/50 border-2 border-emerald-700 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-7 flex flex-col justify-between gap-3 sm:gap-4 md:gap-5"
               >
-                <div class="space-y-3">
+                <div class="space-y-2 sm:space-y-3 md:space-y-4">
                   <div class="flex items-center justify-between">
-                    <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+                    <h3
+                      class="text-lime-50 font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
+                    >
                       Kits de regalo
                     </h3>
                     <span
-                      class="px-2 py-0.5 rounded-full bg-emerald-800 text-lime-100 text-[11px]"
+                      class="px-2 sm:px-2.5 md:px-3 py-0.5 sm:py-1 rounded-full bg-emerald-800 text-lime-100 text-[10px] sm:text-xs md:text-sm"
                     >
                       Especial
                     </span>
                   </div>
-                  <p class="text-sm text-lime-100/85 leading-relaxed">
+                  <p
+                    class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 leading-relaxed"
+                  >
                     Combos de jabones, shampoo y cremas listos para regalar en
                     empaques cuidados, ideales para sorprender de forma
                     consciente.
                   </p>
                 </div>
-                <ul class="text-xs text-lime-100/85 space-y-1.5">
+                <ul
+                  class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 space-y-1.5 sm:space-y-2"
+                >
                   <li>• Packs personalizados</li>
-                  <li>• Mensajes dedicados</li>
+                  <li>���� Mensajes dedicados</li>
                   <li>• Opción herbales o frutales</li>
                 </ul>
               </article>
@@ -441,59 +622,215 @@
           id="beneficios"
           class="w-full border-t border-emerald-800 bg-emerald-900"
         >
-          <div class="max-w-6xl mx-auto px-6 py-10 md:py-12 bg-emerald-900">
-            <div
-              class="flex flex-col md:flex-row md:items-start md:justify-between gap-8"
-            >
-              <div class="max-w-xl space-y-3">
+          <div
+            class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-10 md:py-16 bg-emerald-900"
+          >
+            <div class="flex flex-col gap-6 sm:gap-8 md:gap-10">
+              <div class="max-w-3xl mx-auto text-center space-y-3 sm:space-y-4">
                 <h2
                   id="beneficios-title"
-                  class="text-2xl md:text-3xl font-semibold text-lime-100"
+                  class="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-lime-100 px-2 sm:px-0"
+                  style="line-height: 1.8"
                 >
                   ¿Por qué elegir cosmética herbal y frutal?
                 </h2>
-                <p class="text-sm md:text-base text-lime-100/85">
+                <p
+                  class="text-xs sm:text-sm md:text-lg lg:text-xl text-lime-100/85 px-2 sm:px-0"
+                  style="line-height: 1.9"
+                >
                   Apostamos por fórmulas simples, efectivas y respetuosas con tu
                   piel y el entorno. Cada producto está pensado para acompañar
                   tu ritual diario con calma y bienestar.
                 </p>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
+              <div
+                class="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 lg:gap-8 w-full"
+              >
                 <div
-                  class="rounded-2xl bg-emerald-900 border border-emerald-800 px-4 py-5 space-y-2"
+                  class="rounded-xl sm:rounded-2xl bg-emerald-900/50 border-2 border-emerald-700 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-7 space-y-2 sm:space-y-3 md:space-y-4"
                 >
-                  <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                  <h3
+                    class="text-lime-50 font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
+                  >
                     Ingredientes conscientes
                   </h3>
-                  <p class="text-xs md:text-sm text-lime-100/85">
+                  <p
+                    class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 leading-relaxed"
+                  >
                     Usamos aceites vegetales, extractos herbales y aromas
                     inspirados en frutas reales. Sin parabenos ni aceites
                     minerales.
                   </p>
                 </div>
                 <div
-                  class="rounded-2xl bg-emerald-900 border border-emerald-800 px-4 py-5 space-y-2"
+                  class="rounded-xl sm:rounded-2xl bg-emerald-900/50 border-2 border-emerald-700 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-7 space-y-2 sm:space-y-3 md:space-y-4"
                 >
-                  <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                  <h3
+                    class="text-lime-50 font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
+                  >
                     Rituales sencillos
                   </h3>
-                  <p class="text-xs md:text-sm text-lime-100/85">
+                  <p
+                    class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 leading-relaxed"
+                  >
                     Productos pensados para que tu rutina sea un momento
                     agradable, sin pasos complicados ni exceso de productos.
                   </p>
                 </div>
                 <div
-                  class="rounded-2xl bg-emerald-900 border border-emerald-800 px-4 py-5 space-y-2"
+                  class="rounded-xl sm:rounded-2xl bg-emerald-900/50 border-2 border-emerald-700 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-7 space-y-2 sm:space-y-3 md:space-y-4"
                 >
-                  <h3 class="text-lime-50 font-semibold text-sm md:text-base">
+                  <h3
+                    class="text-lime-50 font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
+                  >
                     Belleza natural
                   </h3>
-                  <p class="text-xs md:text-sm text-lime-100/85">
+                  <p
+                    class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 leading-relaxed"
+                  >
                     Respetamos la textura natural de tu piel y cabello, buscando
                     equilibrio, suavidad y bienestar a largo plazo.
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+        <!-- GALERÍA DE PRODUCTOS -->
+        <section
+          id="galeria"
+          class="w-full border-t border-emerald-800 bg-emerald-900"
+        >
+          <div
+            class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-10 md:py-16 bg-emerald-900"
+          >
+            <div
+              class="max-w-3xl mx-auto text-center space-y-3 sm:space-y-4 mb-6 sm:mb-8 md:mb-10"
+            >
+              <h2
+                class="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-lime-100 leading-tight px-2 sm:px-0"
+              >
+                Galería de productos
+              </h2>
+              <p
+                class="text-xs sm:text-sm md:text-lg lg:text-xl text-lime-100/85 leading-relaxed px-2 sm:px-0"
+              >
+                Conoce de cerca nuestros productos artesanales hechos con amor
+              </p>
+            </div>
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6"
+            >
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/rrr.png"
+                  alt="Producto Esencia Herbal - Logo"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/rtr.png"
+                  alt="Producto Esencia Herbal - Productos naturales"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/rtrt.png"
+                  alt="Producto Esencia Herbal - Cremas y jabones"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/1rr.png"
+                  alt="Producto Esencia Herbal - Colección completa"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/ww.png"
+                  alt="Producto Esencia Herbal - Jabones artesanales"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/w7.png"
+                  alt="Producto Esencia Herbal - Shampoos naturales"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/w8.png"
+                  alt="Producto Esencia Herbal - Cremas corporales"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/www.png"
+                  alt="Producto Esencia Herbal - Línea herbal"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/wwww.png"
+                  alt="Producto Esencia Herbal - Aromas naturales"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/wwwww.png"
+                  alt="Producto Esencia Herbal - Kits de regalo"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
+              <article
+                class="card-hover rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border border-emerald-700 bg-emerald-900/50"
+              >
+                <img
+                  src="https://raw.githubusercontent.com/frontenddeveloper2025dev/EsenciaHerbal/refs/heads/main/wwwwww.png"
+                  alt="Producto Esencia Herbal - Productos frutales"
+                  class="w-full h-auto object-cover"
+                  onerror="this.src=''; this.alt='Imagen no disponible'; this.style.display='none';"
+                />
+              </article>
             </div>
           </div>
         </section>
@@ -503,22 +840,26 @@
           class="w-full border-t border-emerald-800 bg-emerald-900"
         >
           <div
-            class="max-w-6xl mx-auto px-6 py-10 md:py-12 flex flex-col lg:flex-row gap-10 lg:items-center bg-emerald-900"
+            class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-10 md:py-16 flex flex-col gap-6 sm:gap-8 md:gap-10 lg:gap-12 bg-emerald-900"
           >
-            <div class="flex-1 space-y-4">
+            <div class="flex-1 space-y-3 sm:space-y-4 md:space-y-5">
               <h2
                 id="cta-title"
-                class="text-2xl md:text-3xl font-semibold text-lime-100"
+                class="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-lime-100"
+                style="line-height: 1.8"
               >
                 ¿Listo para cuidar tu piel con plantas y frutas?
               </h2>
-              <p class="text-sm md:text-base text-lime-100/85">
+              <p
+                class="text-xs sm:text-sm md:text-lg lg:text-xl text-lime-100/85"
+                style="line-height: 1.9"
+              >
                 Déjanos tu correo y te enviaremos el catálogo actualizado, tips
                 de cuidado natural y las novedades de cada temporada.
               </p>
               <form
                 id="contact-form"
-                class="mt-2 flex flex-col sm:flex-row gap-3 max-w-lg"
+                class="mt-3 sm:mt-4 flex flex-col sm:flex-row gap-2 sm:gap-3 max-w-lg"
                 aria-labelledby="cta-title"
               >
                 <div class="flex-1">
@@ -528,7 +869,7 @@
                     name="email"
                     type="email"
                     autocomplete="email"
-                    class="input-focus w-full px-4 py-2.5 rounded-full bg-emerald-900 border border-emerald-700 text-lime-100 placeholder-lime-100/60 text-sm"
+                    class="input-focus w-full px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-emerald-900 border-2 border-emerald-700 text-lime-100 placeholder-lime-100/60 text-xs sm:text-sm md:text-base"
                     placeholder="Tu correo electrónico"
                     required
                   />
@@ -536,26 +877,28 @@
                 <button
                   id="cta-button"
                   type="submit"
-                  class="btn-focus inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-lime-300 text-emerald-900 font-semibold text-sm md:text-base shadow-md hover:bg-lime-200 transition-colors"
+                  class="btn-focus inline-flex items-center justify-center px-5 sm:px-6 md:px-7 py-2.5 sm:py-3 rounded-full bg-lime-300 text-emerald-900 font-bold text-xs sm:text-sm md:text-base shadow-md hover:bg-lime-200 transition-colors"
                 >
                   Escríbeme el catálogo
                 </button>
               </form>
               <p
                 id="form-message"
-                class="text-xs md:text-sm text-lime-100/85 mt-1"
+                class="text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/85 mt-2"
                 aria-live="polite"
               ></p>
             </div>
             <!-- Mini lista de ingredientes -->
             <aside
-              class="flex-1 rounded-3xl bg-emerald-900 border border-emerald-800 px-5 py-6 space-y-4"
+              class="flex-1 rounded-xl sm:rounded-2xl bg-emerald-900/50 border-2 border-emerald-700 px-3 sm:px-4 md:px-6 py-4 sm:py-5 md:py-7 space-y-3 sm:space-y-4 md:space-y-5"
             >
-              <h3 class="text-lime-50 font-semibold text-base md:text-lg">
+              <h3
+                class="text-lime-50 font-bold text-base sm:text-lg md:text-xl lg:text-2xl"
+              >
                 Ingredientes favoritos de la casa
               </h3>
               <ul
-                class="grid grid-cols-2 gap-3 text-xs md:text-sm text-lime-100/90"
+                class="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm md:text-base lg:text-lg text-lime-100/90"
               >
                 <li class="flex items-center gap-2">
                   <span>🌿</span> <span>Romero &amp; ortiga</span>
@@ -581,68 +924,332 @@
         </section>
       </main>
       <footer class="w-full border-t border-emerald-800 bg-emerald-900">
-        <div class="max-w-6xl mx-auto px-6 py-6 space-y-6 bg-emerald-900">
+        <div
+          class="max-w-6xl mx-auto px-3 sm:px-4 md:px-6 py-5 sm:py-6 md:py-8 space-y-4 sm:space-y-5 md:space-y-6 bg-emerald-900"
+        >
           <!-- Información de contacto -->
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs md:text-sm text-lime-100/85"
-          >
-            <div class="flex items-start gap-2">
-              <span class="text-lime-300 mt-0.5">📧</span>
-              <div>
-                <p class="font-semibold text-lime-100">Email</p>
-                <a
-                  href="mailto:hola@escenciaherbal.com"
-                  class="link-focus hover:text-lime-200 underline"
+          <div class="flex justify-center gap-3 sm:gap-4 md:gap-6 flex-wrap">
+            <!-- Icono Email -->
+            <a
+              href="mailto:hola@escenciaherbal.com"
+              class="link-focus w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-lime-300 hover:bg-lime-200 hover:scale-110 transition-all flex items-center justify-center group"
+              title="Email: hola@escenciaherbal.com"
+            >
+              <svg
+                class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-emerald-900"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                /></svg
+            ></a>
+            <!-- Icono Teléfono -->
+            <a
+              href="tel:+525610677516"
+              class="link-focus w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-lime-300 hover:bg-lime-200 hover:scale-110 transition-all flex items-center justify-center group"
+              title="Teléfono: 56 1067 7516"
+            >
+              <svg
+                class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-emerald-900"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                /></svg
+            ></a>
+            <!-- Icono Dirección -->
+            <a
+              href="https://maps.google.com/?q=Toltecas+166+San+Pedro+de+los+Pinos+CDMX"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link-focus w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-lime-300 hover:bg-lime-200 hover:scale-110 transition-all flex items-center justify-center group"
+              title="Dirección: Toltecas 166, San Pedro de los Pinos, CDMX"
+            >
+              <svg
+                class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-emerald-900"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                /></svg
+            ></a>
+          </div>
+          <!-- Redes Sociales -->
+          <div class="pt-3 sm:pt-4 border-t border-emerald-800">
+            <p
+              class="text-lime-100 font-semibold text-sm sm:text-base mb-3 sm:mb-4 text-center"
+            >
+              Síguenos en redes sociales
+            </p>
+            <div class="flex justify-center gap-2 sm:gap-3 md:gap-4 flex-wrap">
+              <a
+                href="https://www.tiktok.com/@esenciaherbal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-focus w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-emerald-800 hover:bg-lime-300 hover:scale-110 transition-all flex items-center justify-center group"
+              >
+                <svg
+                  class="w-5 h-5 sm:w-5.5 sm:h-5.5 md:w-6 md:h-6 text-lime-100 group-hover:text-emerald-900"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
                 >
-                  hola@escenciaherbal.com
-                </a>
-              </div>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-lime-300 mt-0.5">📱</span>
-              <div>
-                <p class="font-semibold text-lime-100">Teléfono</p>
-                <a
-                  href="tel:+525610677516"
-                  class="link-focus hover:text-lime-200 underline"
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"
+                  /></svg
+              ></a>
+              <a
+                href="https://www.instagram.com/esenciaherbal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-focus w-12 h-12 rounded-full bg-emerald-800 hover:bg-lime-300 hover:scale-110 transition-all flex items-center justify-center group"
+              >
+                <svg
+                  class="w-6 h-6 text-lime-100 group-hover:text-emerald-900"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
                 >
-                  56 1067 7516
-                </a>
-              </div>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-lime-300 mt-0.5">📍</span>
-              <div>
-                <p class="font-semibold text-lime-100">Dirección</p>
-                <p>
-                  Toltecas 166<br />
-                  San Pedro de los Pinos<br />
-                  CDMX 01180
-                </p>
-              </div>
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  /></svg
+              ></a>
+              <a
+                href="https://www.facebook.com/esenciaherbal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-focus w-12 h-12 rounded-full bg-emerald-800 hover:bg-lime-300 hover:scale-110 transition-all flex items-center justify-center group"
+              >
+                <svg
+                  class="w-6 h-6 text-lime-100 group-hover:text-emerald-900"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  /></svg
+              ></a>
+              <a
+                href="https://www.pinterest.com/esenciaherbal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-focus w-12 h-12 rounded-full bg-emerald-800 hover:bg-lime-300 hover:scale-110 transition-all flex items-center justify-center group"
+              >
+                <svg
+                  class="w-6 h-6 text-lime-100 group-hover:text-emerald-900"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"
+                  /></svg
+              ></a>
+              <a
+                href="https://github.com/esenciaherbal"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-focus w-12 h-12 rounded-full bg-emerald-800 hover:bg-lime-300 hover:scale-110 transition-all flex items-center justify-center group"
+              >
+                <svg
+                  class="w-6 h-6 text-lime-100 group-hover:text-emerald-900"
+                  fill="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  /></svg
+              ></a>
             </div>
           </div>
           <!-- Footer text y badges -->
           <div
-            class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-emerald-800"
+            class="flex flex-col items-center justify-center gap-3 pt-4 border-t border-emerald-800"
           >
             <p
               id="footer-text"
-              class="text-xs md:text-sm text-lime-100/75 text-center sm:text-left"
+              class="text-sm md:text-base text-lime-100/75 text-center"
             >
               Hecho con amor, plantas y frutas. Cosmética natural para tu día a
               día.
             </p>
-            <div class="flex gap-3 text-xs text-lime-100/80">
+            <div class="flex gap-3 text-sm md:text-base text-lime-100/80">
               <span>🍃 Marca artesanal</span> <span>·</span>
               <span>Producción limitada</span>
             </div>
           </div>
         </div>
       </footer>
+      <!-- Chat Bot -->
+      <div
+        id="chat-widget"
+        class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50"
+      >
+        <!-- Botón flotante -->
+        <button
+          id="chat-toggle"
+          type="button"
+          class="btn-focus w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-lime-300 text-emerald-900 shadow-lg hover:bg-lime-200 transition-all hover:scale-110 flex items-center justify-center"
+          aria-label="Abrir chat de ayuda"
+        >
+          <svg
+            class="w-7 h-7 sm:w-8 sm:h-8"
+            fill="none"
+            stroke="currentColor"
+            viewbox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+            />
+          </svg>
+        </button>
+        <!-- Ventana de chat -->
+        <div
+          id="chat-window"
+          class="absolute bottom-16 sm:bottom-20 right-0 w-[calc(100vw-2rem)] max-w-[340px] sm:max-w-[380px] md:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden transition-all"
+          style="display: none"
+        >
+          <!-- Header del chat -->
+          <div
+            class="bg-emerald-900 px-5 py-4 flex items-center justify-between"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-10 h-10 rounded-full bg-lime-300 flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-emerald-900"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h7"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-white font-semibold text-sm">
+                  Asistente Herbal
+                </h3>
+                <p class="text-lime-100/80 text-xs">Siempre disponible</p>
+              </div>
+            </div>
+            <button
+              id="chat-close"
+              type="button"
+              class="text-lime-100 hover:text-white transition-colors"
+              aria-label="Cerrar chat"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewbox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <!-- Mensajes -->
+          <div
+            id="chat-messages"
+            class="h-80 overflow-y-auto p-4 bg-gray-50 space-y-3"
+          >
+            <!-- Mensaje inicial del bot -->
+            <div class="flex gap-2 items-start">
+              <div
+                class="w-8 h-8 rounded-full bg-lime-300 flex items-center justify-center flex-shrink-0"
+              >
+                <svg
+                  class="w-4 h-4 text-emerald-900"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h7"
+                  />
+                </svg>
+              </div>
+              <div
+                class="bg-white rounded-2xl rounded-tl-none px-4 py-3 shadow-sm max-w-[75%]"
+              >
+                <p class="text-sm text-gray-800">
+                  ¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- Input de mensaje -->
+          <form id="chat-form" class="p-4 bg-white border-t border-gray-200">
+            <div class="flex gap-2">
+              <label for="chat-input" class="sr-only">Escribe tu mensaje</label>
+              <input
+                id="chat-input"
+                type="text"
+                class="flex-1 px-4 py-2 rounded-full border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Escribe tu mensaje..."
+                autocomplete="off"
+              />
+              <button
+                type="submit"
+                class="btn-focus w-10 h-10 rounded-full bg-emerald-900 text-white hover:bg-emerald-800 transition-colors flex items-center justify-center flex-shrink-0"
+                aria-label="Enviar mensaje"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewbox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                  />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <script>
-      // Configuración por defecto para el panel de edición
+      // Configuraci�����n por defecto para el panel de edición
       const defaultConfig = {
         hero_titulo: "Cosmética natural hecha con amor",
         hero_subtitulo: "Jabones, shampoos y cremas herbales y frutales",
@@ -660,7 +1267,7 @@
         header_label: "",
         cta_label: "",
         hero_font_family: "system-ui",
-        hero_font_size: 18,
+        hero_font_size: 32,
         background_color: "#064e3b",
         surface_color: "#064e3b",
         text_color: "#ecfdf5",
@@ -697,12 +1304,12 @@
         document.body.style.fontFamily = fontStack;
 
         // Escalado de textos clave
-        heroTitleEl.style.fontSize = baseSize * 2 + "px";
-        heroSubtitleEl.style.fontSize = baseSize * 1.05 + "px";
-        productosTitleEl.style.fontSize = baseSize * 1.5 + "px";
-        beneficiosTitleEl.style.fontSize = baseSize * 1.5 + "px";
-        ctaTitleEl.style.fontSize = baseSize * 1.5 + "px";
-        footerTextEl.style.fontSize = baseSize * 0.8 + "px";
+        heroTitleEl.style.fontSize = baseSize * 2.2 + "px";
+        heroSubtitleEl.style.fontSize = baseSize * 1.15 + "px";
+        productosTitleEl.style.fontSize = baseSize * 1.8 + "px";
+        beneficiosTitleEl.style.fontSize = baseSize * 1.8 + "px";
+        ctaTitleEl.style.fontSize = baseSize * 1.8 + "px";
+        footerTextEl.style.fontSize = baseSize * 0.85 + "px";
 
         // Textos
         heroTitleEl.textContent = cfg.hero_titulo || defaultConfig.hero_titulo;
@@ -790,6 +1397,166 @@
           }
         });
 
+      // Inicializar Chat Bot
+      (function initChatBot() {
+        const chatToggle = document.getElementById("chat-toggle");
+        const chatWindow = document.getElementById("chat-window");
+        const chatClose = document.getElementById("chat-close");
+        const chatForm = document.getElementById("chat-form");
+        const chatInput = document.getElementById("chat-input");
+        const chatMessages = document.getElementById("chat-messages");
+
+        let isOpen = false;
+
+        // Abrir/cerrar chat
+        chatToggle.addEventListener("click", function () {
+          isOpen = true;
+          chatWindow.style.display = "block";
+          chatInput.focus();
+        });
+
+        chatClose.addEventListener("click", function () {
+          isOpen = false;
+          chatWindow.style.display = "none";
+        });
+
+        // Función para agregar mensaje
+        function addMessage(text, isUser = false) {
+          const messageDiv = document.createElement("div");
+          messageDiv.className = isUser
+            ? "flex gap-2 items-start justify-end"
+            : "flex gap-2 items-start";
+
+          if (isUser) {
+            messageDiv.innerHTML = `
+            <div class="bg-emerald-900 rounded-2xl rounded-tr-none px-4 py-3 shadow-sm max-w-[75%]">
+              <p class="text-sm text-white">${text}</p>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-emerald-900 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-lime-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+          `;
+          } else {
+            messageDiv.innerHTML = `
+            <div class="w-8 h-8 rounded-full bg-lime-300 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-emerald-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
+              </svg>
+            </div>
+            <div class="bg-white rounded-2xl rounded-tl-none px-4 py-3 shadow-sm max-w-[75%]">
+              <p class="text-sm text-gray-800">${text}</p>
+            </div>
+          `;
+          }
+
+          chatMessages.appendChild(messageDiv);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Respuestas del bot
+        const botResponses = {
+          keywords: {
+            hola: "¡Hola! ¿Te gustaría conocer nuestros productos herbales o frutales?",
+            productos:
+              "Tenemos jabones, shampoos y cremas 100% naturales. ¿Sobre cuál te gustaría saber más?",
+            precio:
+              "Nuestros productos van desde $80 hasta $250 MXN. ¿Te interesa alguno en particular?",
+            envío:
+              "Hacemos envíos a toda la República Mexicana. El costo varía según tu ubicación.",
+            ingredientes:
+              "Usamos romero, lavanda, avena, coco, naranja y más ingredientes naturales",
+            jabón:
+              "Nuestros jabones artesanales son hechos con aceites vegetales y extractos herbales. ¡Perfectos para piel sensible!",
+            shampoo:
+              "Nuestros shampoos sólidos fortalecen el cabello con romero, ortiga y aloe",
+            crema:
+              "Las cremas están hechas con manteca de karit��, coco y frutas tropicales para hidratación profunda.",
+            contacto:
+              "Puedes escribirnos al 56 1067 7516 o al correo hola@escenciaherbal.com",
+            horario: "Estamos disponibles de lunes a s��bado de 9am a 7pm",
+            natural:
+              "¡Sí! Todos nuestros productos son 100% naturales, sin parabenos ni químicos agresivos",
+            regalo:
+              "Tenemos kits de regalo perfectos para sorprender. ¿Te gustaría ver las opciones?",
+            gracias:
+              "¡Con mucho gusto! ¿Hay algo más en lo que pueda ayudarte?",
+            adios: "¡Hasta pronto! Espero verte de nuevo.",
+          },
+          default:
+            "Interesante pregunta. Te recomiendo contactarnos directamente al 56 1067 7516 para darte información más específica.",
+        };
+
+        // Procesar mensaje del usuario
+        chatForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const userMessage = chatInput.value.trim();
+
+          if (!userMessage) return;
+
+          // Agregar mensaje del usuario
+          addMessage(userMessage, true);
+          chatInput.value = "";
+
+          // Simular "escribiendo..."
+          setTimeout(() => {
+            const messageLower = userMessage.toLowerCase();
+            let botResponse = botResponses.default;
+
+            // Buscar palabras clave
+            for (const [keyword, response] of Object.entries(
+              botResponses.keywords
+            )) {
+              if (messageLower.includes(keyword)) {
+                botResponse = response;
+                break;
+              }
+            }
+
+            addMessage(botResponse, false);
+          }, 800);
+        });
+      })();
+
+      // Inicializar menú móvil
+      (function initMobileMenu() {
+        const menuToggle = document.getElementById("mobile-menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const menuIcon = document.getElementById("menu-icon");
+        const closeIcon = document.getElementById("close-icon");
+        const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
+
+        let isMenuOpen = false;
+
+        menuToggle.addEventListener("click", function () {
+          isMenuOpen = !isMenuOpen;
+
+          if (isMenuOpen) {
+            mobileMenu.classList.remove("hidden");
+            menuIcon.classList.add("hidden");
+            closeIcon.classList.remove("hidden");
+            menuToggle.setAttribute("aria-expanded", "true");
+          } else {
+            mobileMenu.classList.add("hidden");
+            menuIcon.classList.remove("hidden");
+            closeIcon.classList.add("hidden");
+            menuToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        mobileMenuLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            mobileMenu.classList.add("hidden");
+            menuIcon.classList.remove("hidden");
+            closeIcon.classList.add("hidden");
+            menuToggle.setAttribute("aria-expanded", "false");
+            isMenuOpen = false;
+          });
+        });
+      })();
+
       // Inicializar Element SDK
       (async function initElementSdk() {
         if (!window.elementSdk) {
@@ -876,7 +1643,7 @@
           if (b) {
             var d = b.createElement("script");
             d.innerHTML =
-              "window.__CF$cv$params={r:'9ad32875b191fc05',t:'MTc2NTYwNDc1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+              "window.__CF$cv$params={r:'9b215cb7b5fbeef2',t:'MTc2NjQyNDc4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
             b.getElementsByTagName("head")[0].appendChild(d);
           }
         }
